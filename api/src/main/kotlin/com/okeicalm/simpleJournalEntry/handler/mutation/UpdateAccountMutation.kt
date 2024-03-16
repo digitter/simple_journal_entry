@@ -2,12 +2,13 @@ package com.okeicalm.simpleJournalEntry.handler.mutation
 
 import com.expediagroup.graphql.generator.scalars.ID
 import com.expediagroup.graphql.server.operations.Mutation
+import com.okeicalm.simpleJournalEntry.entity.AccountCategory
 import com.okeicalm.simpleJournalEntry.handler.type.AccountType
 import com.okeicalm.simpleJournalEntry.usecase.account.AccountUpdateUseCase
 import com.okeicalm.simpleJournalEntry.usecase.account.AccountUpdateUseCaseInput
 import org.springframework.stereotype.Component
 
-data class UpdateAccountInput(val id: ID, val code: String, val name: String, val elementType: Int)
+data class UpdateAccountInput(val id: ID, val code: String, val name: String, val elementType: AccountCategory)
 
 @Component
 class UpdateAccountMutation(private val accountUpdateUseCase: AccountUpdateUseCase) : Mutation {
