@@ -29,7 +29,7 @@ directive @specifiedBy(
 
 type Account {
   code: String!
-  elementType: Int!
+  elementType: AccountCategory!
   id: ID!
   name: String!
 }
@@ -63,9 +63,17 @@ type Query {
   allJournals: [Journal!]!
 }
 
+enum AccountCategory {
+  ASSETS
+  EXPENSES
+  LIABILITIES
+  NET_ASSETS
+  REVENUE
+}
+
 input CreateAccountInput {
   code: String!
-  elementType: Int!
+  elementType: AccountCategory!
   name: String!
 }
 
@@ -86,7 +94,7 @@ input DeleteAccountInput {
 
 input UpdateAccountInput {
   code: String!
-  elementType: Int!
+  elementType: AccountCategory!
   id: ID!
   name: String!
 }

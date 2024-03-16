@@ -1,6 +1,7 @@
 package com.okeicalm.simpleJournalEntry.repository
 
 import com.okeicalm.simpleJournalEntry.entity.Account
+import com.okeicalm.simpleJournalEntry.infra.db.enums.AccountsElementType
 import com.okeicalm.simpleJournalEntry.infra.db.tables.Accounts
 import org.jooq.DSLContext
 import org.springframework.stereotype.Repository
@@ -34,7 +35,7 @@ class AccountRepositoryImpl(private val dslContext: DSLContext) : AccountReposit
             .apply {
                 name = account.name
                 code = account.code
-                elementType = account.elementType
+                elementType = AccountsElementType.valueOf(account.elementType.name)
             }
         record.store()
 
@@ -46,7 +47,7 @@ class AccountRepositoryImpl(private val dslContext: DSLContext) : AccountReposit
             .update(Accounts.ACCOUNTS)
             .set(Accounts.ACCOUNTS.CODE, account.code)
             .set(Accounts.ACCOUNTS.NAME, account.name)
-            .set(Accounts.ACCOUNTS.ELEMENT_TYPE, account.elementType)
+            .set(Accounts.ACCOUNTS.ELEMENT_TYPE, AccountsElementType.valueOf(account.elementType.name))
             .where(Accounts.ACCOUNTS.ID.eq(account.id))
             .execute()
         return account
